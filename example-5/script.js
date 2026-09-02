@@ -81,9 +81,9 @@ function analyse(points) {
 //       together don't land on exactly the same spot.
 // ---------------------------------------------------------------
 
-const SPACING_X = 4;     // gap between one frequency lane and the next
-const Y_MIN = 1.2;
-const Y_MAX = 2.6;
+const SPACING_X = 2.5;     // gap between one frequency lane and the next
+const Y_MIN = 1;
+const Y_MAX = 3;
 const SIZE = 1.5;
 const FACING = 180;
 
@@ -115,7 +115,7 @@ function makeCopy(point) {
   el.setAttribute("position", `${x} ${random(Y_MIN, Y_MAX)} ${point.z}`);
   el.setAttribute("rotation", `0 ${FACING} 0`);
   el.setAttribute("scale", `${SIZE} ${SIZE} ${SIZE}`);
-  el.setAttribute("align", "center");
+  el.setAttribute("align", "left");
   el.setAttribute("width", "6");
   el.setAttribute("side", "double");
   el.setAttribute("color", `hsl(255, 22%, ${lightness}%)`);
