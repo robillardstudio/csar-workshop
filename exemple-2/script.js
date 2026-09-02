@@ -14,7 +14,7 @@
 // ---------------------------------------------------------------
 
 async function loadData() {
-  const response = await fetch("data.csv");
+  const response = await fetch("data-csar-oval.csv");
   const text = await response.text();
   return parseCSV(text);
 }
@@ -73,7 +73,7 @@ function makeLabel(point) {
   el.setAttribute("align", "center");
   el.setAttribute("width", "6");
   // font attribute
-  // el.setAttribute("side", "double");
+  el.setAttribute("side", "double");
   // el.setAttribute("font", "dejavu");
 
   // confidence -> size, same idea as mapping a value to a

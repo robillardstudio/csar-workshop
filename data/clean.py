@@ -19,10 +19,10 @@ import pandas as pd
 USE_LOCAL_XZ = True
 
 # Set to True to drop rows whose (lat, lon) pair repeats an earlier row.
-REMOVE_LATLON_DUPLICATES = True
+REMOVE_LATLONLABEL_DUPLICATES = True
 
-INPUT_FILE = "live-detection_20260826120120_raw.csv"
-OUTPUT_FILE = "csar-oval-park-workshop-metric-noduplicates.csv"
+INPUT_FILE = "live-detection_20260828-083140_raw.csv"
+OUTPUT_FILE = "csar-indianola-workshop-metric-noduplicates.csv"
 
 EARTH_RADIUS_M = 6378137.0  # WGS84 equatorial radius
 
@@ -59,7 +59,7 @@ def latlon_to_local_xz(df, lat_col="lat", lon_col="lon", origin=None):
     return df
 
 
-def remove_latlon_duplicates(df, lat_col="lat", lon_col="lon", label_col="label"):
+def REMOVE_LATLONLABEL_DUPLICATES(df, lat_col="lat", lon_col="lon", label_col="label"):
     """
     Drop rows whose (lat, lon) pair has already appeared earlier in df,
     keeping the first occurrence of each unique coordinate.
@@ -75,8 +75,8 @@ df = pd.read_csv(INPUT_FILE)
 # Remove rows where rank is 2 or 3
 df = df[~df["rank"].isin([2, 3])]
 
-if REMOVE_LATLON_DUPLICATES:
-    df = remove_latlon_duplicates(df, lat_col="lat", lon_col="lon", label_col="label")
+if REMOVE_LATLONLABEL_DUPLICATES:
+    df = REMOVE_LATLONLABEL_DUPLICATES(df, lat_col="lat", lon_col="lon", label_col="label")
 
 if USE_LOCAL_XZ:
     df = latlon_to_local_xz(df, lat_col="lat", lon_col="lon")
