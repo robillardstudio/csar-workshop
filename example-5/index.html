@@ -8,10 +8,10 @@
 <body>
 
 <!-- Same scene and camera as exemple-3 and 4. The fog is thinner
-     again (0.008): the rarest words stand almost 70m away, and at
-     0.012 the back of the field would be gone before you reached
-     it. -->
-<a-scene fog="type: exponential; color: #8a8a8a; density: 0.008">
+     again (0.005): z comes straight from the recorded walk here,
+     which runs nearly 100m, and any denser fog would hide the far
+     end of the track entirely. -->
+<a-scene fog="type: exponential; color: #8a8a8a; density: 0.005">
 
   <!-- uniform mid-gray background, no horizon or heavy contrast -->
   <a-sky color="#8a8a8a"></a-sky>
@@ -26,8 +26,9 @@
                      repeat: 1000 1000"></a-plane>
 
   <!-- the camera: same rig as exemple-3, stepped back 5m and turned
-       to face +z. The columns rise well above eye level, so look up
-       as well as forward. -->
+       to face +z, looking down the length of the recorded walk.
+       Everything sits near eye level; it is the lanes to your left
+       and right that carry the frequency. -->
   <a-entity position="0 1.6 -5" rotation="0 180 0">
     <a-camera look-controls wasd-controls></a-camera>
   </a-entity>

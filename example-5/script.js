@@ -2,18 +2,18 @@
 // EXAMPLE 5 — REPETITION
 //
 // The classifier said "lakeside lakeshore" fifteen times and
-// "bow" once. In examples 1 to 4 that difference was invisible:
-// every row of the CSV became one label, scattered somewhere, and
-// a word repeated fifteen times just looked like fifteen unrelated
+// "bow" once. In the earlier examples that difference was
+// invisible: every row of the CSV became one label, and a word
+// repeated fifteen times just looked like fifteen unrelated
 // words.
 //
-// Here nothing is discarded and nothing is summarised. Every
-// occurrence is drawn, and copies of the same word stack on top
-// of each other. Frequency becomes height — a column you have to
-// look up at.
+// Here the repetition is the real one. Nothing is deduplicated
+// and nothing is invented: every occurrence is drawn at the z it
+// was actually recorded at, so a word the model kept returning
+// keeps coming back at you as you walk down the track.
 //
-// The floor plan is two sortings at once: alphabetical order
-// across x, frequency rank into z. Neither is geography.
+// Across x, the words sort themselves into lanes by how often
+// they occur — rare on one side, insistent on the other.
 // ===============================================================
 
 
@@ -44,22 +44,19 @@ function parseCSV(text) {
 
 
 // ---------------------------------------------------------------
-// STEP 2 — counting. This is the new step: before drawing
-// anything we read the whole dataset once and ask how often each
-// word appears.
+// STEP 2 — counting. Before drawing anything we read the whole
+// dataset once and ask how often each word appears.
 //
-// counts        — { "park bench": 13, "bow": 1, ... }
-// alphabetical  — the words sorted A to Z
-// byFrequency   — the same words sorted most common first
+// counts       — { "park bench": 13, "bow": 1, ... }
+// mostCommon   — the highest of those numbers, used to center the
+//                lanes and to scale the color
 //
-// These are filled in by analyse(), which runs after the CSV
-// loads. They start empty because we cannot count data we have
-// not read yet.
+// They start empty because we cannot count data we have not read
+// yet; analyse() fills them once the CSV has loaded.
 // ---------------------------------------------------------------
 
 let counts = {};
-let alphabetical = [];
-let byFrequency = [];
+let mostCommon = 1;
 
 function analyse(points) {
   counts = {};
@@ -68,29 +65,25 @@ function analyse(points) {
     counts[point.label] = (counts[point.label] || 0) + 1;
   }
 
-  alphabetical = Object.keys(counts).sort();
-  byFrequency = Object.keys(counts).sort((a, b) => counts[b] - counts[a]);
+  mostCommon = Math.max(...Object.values(counts));
 }
 
 
 // ---------------------------------------------------------------
-// STEP 3 — the layout. Each word gets one column, and the column
-// is placed by where the word falls in the two sortings.
+// STEP 3 — the layout.
 //
-//   x — alphabetical position, centered on the origin
-//   z — frequency rank: the most common word stands closest
-//   y — one step per copy, so the column grows as it repeats
-//
-// Because the two sortings disagree, the field is not a straight
-// line. A word that is alphabetically early but rare ends up far
-// left and far away.
+//   x — frequency. Every word that occurs the same number of
+//       times shares a lane, so all the words seen only once
+//       line up together at one edge of the field.
+//   z — straight from the CSV: where the classifier actually said
+//       it. This is the only axis still carrying the walk.
+//   y — a small random height, purely so two words recorded close
+//       together don't land on exactly the same spot.
 // ---------------------------------------------------------------
 
-const SPACING_X = 3.5;   // gap between neighbours in the alphabet
-const SPACING_Z = 2.5;   // gap between one frequency rank and the next
-const NEAR = 12;         // distance to the most frequent word
-const BASE = 1.2;        // height of the first copy
-const STEP = 1.1;        // height added by each repeat
+const SPACING_X = 4;     // gap between one frequency lane and the next
+const Y_MIN = 1.2;
+const Y_MAX = 2.6;
 const SIZE = 1.5;
 const FACING = 180;
 
@@ -98,29 +91,28 @@ function map(value, inMin, inMax, outMin, outMax) {
   return outMin + ((value - inMin) / (inMax - inMin)) * (outMax - outMin);
 }
 
+function random(min, max) {
+  return min + Math.random() * (max - min);
+}
+
 
 // ---------------------------------------------------------------
-// STEP 4 — one copy of one word. floor says which repeat this is:
-// 0 for the first time the word appeared, 1 for the second, and
-// so on up the column.
+// STEP 4 — one row of the CSV, one label. There is no counter to
+// keep here: the repetition looks after itself, because the data
+// already contains every occurrence.
 // ---------------------------------------------------------------
 
-function makeCopy(label, floor) {
+function makeCopy(point) {
   const el = document.createElement("a-text");
+  const count = counts[point.label];
 
-  const alphaIndex = alphabetical.indexOf(label);
-  const rankIndex = byFrequency.indexOf(label);
-
-  const x = (alphaIndex - (alphabetical.length - 1) / 2) * SPACING_X;
-  const z = NEAR + rankIndex * SPACING_Z;
-  const y = BASE + floor * STEP;
+  const x = (count - (1 + mostCommon) / 2) * SPACING_X;
 
   // common words darker, rare words pale
-  const most = counts[byFrequency[0]];
-  const lightness = map(counts[label], 1, most, 68, 38);
+  const lightness = map(count, 1, mostCommon, 68, 38);
 
-  el.setAttribute("value", label);
-  el.setAttribute("position", `${x} ${y} ${z}`);
+  el.setAttribute("value", point.label);
+  el.setAttribute("position", `${x} ${random(Y_MIN, Y_MAX)} ${point.z}`);
   el.setAttribute("rotation", `0 ${FACING} 0`);
   el.setAttribute("scale", `${SIZE} ${SIZE} ${SIZE}`);
   el.setAttribute("align", "center");
@@ -133,22 +125,17 @@ function makeCopy(label, floor) {
 
 
 // ---------------------------------------------------------------
-// STEP 5 — build the scene. seen[] remembers how many copies of
-// each word we have already placed, which gives us the floor
-// number for the next one.
+// STEP 5 — build the scene.
 // ---------------------------------------------------------------
 
 async function build() {
   const points = await loadData();
   const field = document.getElementById("field");
-  const seen = {};
 
   analyse(points);
 
   for (const point of points) {
-    const floor = seen[point.label] || 0;
-    seen[point.label] = floor + 1;
-    field.appendChild(makeCopy(point.label, floor));
+    field.appendChild(makeCopy(point));
   }
 }
 
