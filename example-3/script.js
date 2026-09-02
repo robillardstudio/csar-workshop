@@ -51,7 +51,6 @@ const nature = {
   "lakeside lakeshore":  { y: 0.05, color: "#6d8494" },
   "sandbar sand bar":    { y: 0.05, color: "#b9a882" },
   "patio terrace":       { y: 0.08, color: "#8f8b85" },
-  "maze labyrinth":      { y: 0.10, color: "#4f4a52" },
 
   // small things lying on it
   "croquet ball":        { y: 0.10, color: "#a8674f" },
@@ -67,9 +66,10 @@ const nature = {
   "worm fence snake fence snake-rail fence Virginia fence":
                          { y: 1.10, color: "#8a6b4a" },
   "unicycle monocycle":  { y: 1.10, color: "#9aa0a6" },
-  "golfcart golf cart":  { y: 1.30, color: "#9aa0a6" },
+  "golfcart golf cart":  { y: 1.20, color: "#9aa0a6" },
   "bow":                 { y: 1.40, color: "#8a6b4a" },
-  "fountain":            { y: 1.50, color: "#6d8494" },
+  "fountain":            { y: 1.40, color: "#6d8494" },
+  "maze labyrinth":      { y: 1.60, color: "#4f4a52" },
 
   // above you
   "horse cart horse-cart": { y: 1.80, color: "#8a6b4a" },
@@ -108,7 +108,7 @@ function makeLabel(point) {
   const profile = naturalize(point);
 
   // small jitter, so the vertical layering is what reads
-  const jitterX = random(-1, 1);
+  const jitterX = random(-2, 2);
   const jitterZ = random(-1, 1);
   const spin = random(-10, 10);
   const size = 2;
