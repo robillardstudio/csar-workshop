@@ -3,9 +3,9 @@
 //
 // Every example so far has been a thing to look at. This one is a
 // thing to do. The 89 classifications are strung along a spiral
-// that rises around you like a staircase with no steps, and
-// coming within reach of a word marks it. A counter in front of
-// you keeps score.
+// that rises around you like a staircase with no steps. Aim the
+// crosshair at a word close enough to touch and click it, and it
+// changes color. A counter in front of you keeps score.
 //
 // Nothing about the data changed. What changed is that reading it
 // now costs you something — you have to walk the whole spiral to
@@ -80,6 +80,7 @@ function spiralPosition(index, total) {
 
 const SIZE = 1.6;
 const COLOR = "#6f6a78";
+const HOVER_COLOR = "#a89ab8";
 const HIT_COLOR = "#d98b4a";
 
 const items = [];
@@ -91,6 +92,10 @@ function makeLabel(point, index, total) {
   // face the middle: text points along +z by default, so turning
   // it by the spiral angle plus 180 aims it back at the origin
   const facing = (spot.angle * 180) / Math.PI + 180;
+
+  // the crosshair only looks for things in this class, which is
+  // how the counter in front of your face avoids being clickable
+  el.setAttribute("class", "word");
 
   el.setAttribute("value", point.label);
   el.setAttribute("position", `${spot.x} ${spot.y} ${spot.z}`);
@@ -110,47 +115,53 @@ function makeLabel(point, index, total) {
 // ---------------------------------------------------------------
 // STEP 4 — the game. This is an A-Frame component: a small piece
 // of behaviour attached to an entity. init() runs once when it is
-// attached; tick() runs every single frame, forever.
+// attached.
 //
-// Every frame we ask where the camera is in the world and compare
-// it to each word still standing. Anything closer than REACH is
-// marked.
+// The crosshair in the middle of your view fires events at
+// whatever it is pointing at — mouseenter when it lands on a word,
+// mouseleave when it slides off, click when you press. Those
+// events travel up to the scene, so one listener here catches all
+// 89 words instead of 89 separate listeners.
+//
+// The crosshair only reaches 6m (see the raycaster in index.html),
+// so a word has to be flown to before it can be clicked.
 // ---------------------------------------------------------------
-
-const REACH = 1.6;
 
 AFRAME.registerComponent("collector", {
 
   init: function () {
-    this.camera = document.querySelector("[camera]");
-    this.here = new THREE.Vector3();
     this.hud = document.getElementById("hud");
     this.hits = 0;
+    this.report();
+
+    this.el.addEventListener("click", (event) => this.hit(event.target));
+    this.el.addEventListener("mouseenter", (event) => this.hover(event.target, true));
+    this.el.addEventListener("mouseleave", (event) => this.hover(event.target, false));
+  },
+
+  find: function (el) {
+    return items.find((item) => item.el === el);
+  },
+
+  hover: function (el, isOver) {
+    const item = this.find(el);
+    if (!item || item.hit) return;
+    item.el.setAttribute("color", isOver ? HOVER_COLOR : COLOR);
+  },
+
+  hit: function (el) {
+    const item = this.find(el);
+    if (!item || item.hit) return;
+
+    item.hit = true;
+    item.el.setAttribute("color", HIT_COLOR);
+    this.hits++;
     this.report();
   },
 
   report: function () {
     const done = this.hits === items.length ? "  —  complete" : "";
     this.hud.setAttribute("value", `${this.hits} / ${items.length}${done}`);
-  },
-
-  tick: function () {
-    this.camera.object3D.getWorldPosition(this.here);
-
-    for (const item of items) {
-      if (item.hit) continue;
-
-      const dx = this.here.x - item.x;
-      const dy = this.here.y - item.y;
-      const dz = this.here.z - item.z;
-
-      if (Math.hypot(dx, dy, dz) < REACH) {
-        item.hit = true;
-        item.el.setAttribute("color", HIT_COLOR);
-        this.hits++;
-        this.report();
-      }
-    }
   },
 });
 
