@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Text Field — Naturalism</title>
+  <title>exemple-3</title>
   <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
 </head>
 <body>
@@ -27,8 +27,13 @@
 
   <!-- the camera: this is YOU, standing 1.6m tall, first person.
        Everything below 1.6 is under your eyeline, everything above
-       is over your head — that is the whole point of this example. -->
-  <a-entity position="0 1.6 0">
+       is over your head — that is the whole point of this example.
+
+       A-Frame's camera faces -z by default, which in our data means
+       north. The recorded walk runs south from the origin (+z), so
+       the rig is turned 180 degrees to start facing down the path
+       instead of away from it. -->
+  <a-entity position="0 1.6 -5" rotation="0 180 0">
     <a-camera look-controls wasd-controls></a-camera>
   </a-entity>
 
