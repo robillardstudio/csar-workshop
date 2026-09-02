@@ -159,9 +159,17 @@ names.forEach((name, i) => {
 // STEP 4 — one data point, one label. point.x and point.z are
 // read from the CSV and then thrown away: position now comes from
 // the category, scattered in a circle around its center.
+// point.confidence survives, as size.
+//
+// Note the range we map against. Confidence here tops out around
+// 0.85 and most predictions sit under 0.2, so mapping from 0 to 1
+// would squash nearly every word to the same small size. Mapping
+// against the real maximum spreads the cluster out instead.
 // ---------------------------------------------------------------
 
-const SIZE = 2;
+const MAX_CONFIDENCE = 0.85;
+const SIZE_MIN = 1.2;
+const SIZE_MAX = 4;
 const FACING = 180;
 
 function makeLabel(point) {
@@ -174,10 +182,13 @@ function makeLabel(point) {
   const distance = random(0, SPREAD);
   const spin = random(-10, 10);
 
+  // confidence -> size
+  const size = map(point.confidence, 0, MAX_CONFIDENCE, SIZE_MIN, SIZE_MAX);
+
   el.setAttribute("value", point.label);
   el.setAttribute("position", `${center.x + Math.sin(angle) * distance} ${random(1, 4.5)} ${center.z + Math.cos(angle) * distance}`);
   el.setAttribute("rotation", `0 ${spin + FACING} 0`);
-  el.setAttribute("scale", `${SIZE} ${SIZE} ${SIZE}`);
+  el.setAttribute("scale", `${size} ${size} ${size}`);
   el.setAttribute("align", "center");
   el.setAttribute("width", "6");
   el.setAttribute("side", "double");
