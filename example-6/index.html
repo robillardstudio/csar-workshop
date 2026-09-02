@@ -42,17 +42,6 @@
        with your head: a HUD rather than an object in the world. -->
   <a-entity position="0 1.6 0" rotation="0 180 0">
     <a-camera look-controls wasd-controls="fly: true; acceleration: 30">
-
-      <!-- the crosshair. It shoots an invisible ray straight ahead
-           and reports what it hits, which is what turns a word into
-           something clickable.
-             objects: .word  — only the labels, never the counter
-             far: 6          — the ray stops after 6m, so distant
-                               words cannot be clicked from here;
-                               you have to fly up to them -->
-      <a-cursor color="#3a3a3a" fuse="false"
-                raycaster="objects: .word; far: 6"></a-cursor>
-
       <a-text id="hud" value="0 / 0"
               position="0 -0.45 -1" align="center" width="2.5"
               color="#3a3a3a" side="double"></a-text>
