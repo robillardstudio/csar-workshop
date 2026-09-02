@@ -7,9 +7,9 @@
 </head>
 <body>
 
-<!-- Same scene as the earlier examples. Fog at 0.01: the outer
-     turn of the spiral is about 38m out, far enough to be hazy
-     but not so far it disappears. -->
+<!-- Same scene as the earlier examples. Fog at 0.01: the whole
+     spiral sits within about 26m of where you start, so it stays
+     hazy at the edges without anything vanishing. -->
 <a-scene fog="type: exponential; color: #8a8a8a; density: 0.01">
 
   <!-- uniform mid-gray background, no horizon or heavy contrast -->
@@ -24,18 +24,24 @@
                      src: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMDAnIGhlaWdodD0nMTAwJz4KPHJlY3Qgd2lkdGg9JzEwMCcgaGVpZ2h0PScxMDAnIGZpbGw9JyM3ZDdkN2QnLz4KPHBhdGggZD0nTTAgMEgxMDBNMCAwVjEwMCcgc3Ryb2tlPScjOTk5OTk5JyBzdHJva2Utd2lkdGg9JzEuNScvPgo8L3N2Zz4K);
                      repeat: 1000 1000"></a-plane>
 
-  <!-- the camera: same rig as exemple-3, but standing at the center
-       of the spiral this time.
+  <!-- the camera: same rig as exemple-3, standing at the bottom of
+       the spiral, in the middle of the cylinder.
 
-       wasd-controls acceleration is lowered from its default 65 to
-       30, so walking is slower and easier to steer — the spiral is
-       around 300m long and meant to be covered deliberately, not
-       sprinted.
+       fly: true is what makes this example work. The spiral climbs
+       to 24m and WASD normally keeps you pinned to the ground; with
+       flying on, W moves you along whatever direction you are
+       looking, so tilting your head up and holding W lifts you.
+       Getting to the last word means learning to steer in three
+       dimensions.
+
+       acceleration is lowered from its default 65 to 30, so moving
+       is slower and easier to control — the spiral is around 260m
+       long and meant to be climbed deliberately, not sprinted.
 
        The counter is a child of the camera, which means it travels
        with your head: a HUD rather than an object in the world. -->
   <a-entity position="0 1.6 0" rotation="0 180 0">
-    <a-camera look-controls wasd-controls="acceleration: 30">
+    <a-camera look-controls wasd-controls="fly: true; acceleration: 30">
       <a-text id="hud" value="0 / 0"
               position="0 -0.45 -1" align="center" width="2.5"
               color="#3a3a3a" side="double"></a-text>

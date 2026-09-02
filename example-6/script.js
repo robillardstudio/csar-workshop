@@ -3,8 +3,9 @@
 //
 // Every example so far has been a thing to look at. This one is a
 // thing to do. The 89 classifications are strung along a spiral
-// that opens 12m around you and winds outward, and walking within
-// reach of a word marks it. A counter in front of you keeps score.
+// that rises around you like a staircase with no steps, and
+// coming within reach of a word marks it. A counter in front of
+// you keeps score.
 //
 // Nothing about the data changed. What changed is that reading it
 // now costs you something — you have to walk the whole spiral to
@@ -42,29 +43,27 @@ function parseCSV(text) {
 // ---------------------------------------------------------------
 // STEP 2 — the spiral. Instead of x and z from the CSV, position
 // comes from how far through the walk a reading is: the first
-// classification sits nearest the center, the last one on the
-// outermost turn.
+// classification sits at ground level and the last one at the top,
+// with the whole dataset winding up the wall of a cylinder.
 //
-// t runs 0 to 1 across the dataset. From it we get an angle (how
-// far around) and a radius (how far out), and sin/cos turn that
-// pair into x and z.
+// t runs 0 to 1 across the dataset. The radius never changes —
+// only the angle (how far around) and the height (how far up).
+// sin/cos turn the angle into x and z.
 // ---------------------------------------------------------------
 
-const TURNS = 2;      // how many times the spiral goes around
-const R_MIN = 12;     // radius of the first word
-const R_MAX = 40;     // radius of the last one
-const Y_MIN = 1.0;    // everything stays within reach: no flying
-const Y_MAX = 2.6;
+const TURNS = 3;      // how many times the spiral goes around
+const RADIUS = 14;    // same distance from the center all the way up
+const Y_MIN = 1.0;    // height of the first word
+const Y_MAX = 24;     // height of the last one — you have to fly
 
 function spiralPosition(index, total) {
   const t = index / (total - 1);
   const angle = t * TURNS * 2 * Math.PI;
-  const radius = R_MIN + t * (R_MAX - R_MIN);
 
   return {
-    x: Math.sin(angle) * radius,
+    x: Math.sin(angle) * RADIUS,
     y: Y_MIN + t * (Y_MAX - Y_MIN),
-    z: Math.cos(angle) * radius,
+    z: Math.cos(angle) * RADIUS,
     angle: angle,
   };
 }
@@ -72,8 +71,8 @@ function spiralPosition(index, total) {
 
 // ---------------------------------------------------------------
 // STEP 3 — one label. Each one turns to face the center of the
-// spiral, so they are readable from where you start and keep
-// turning towards you as you wind outward.
+// spiral, so they stay readable from the middle of the cylinder
+// as you climb.
 //
 // items[] is the list the game logic reads: the element plus the
 // place it stands, and whether it has been reached yet.
