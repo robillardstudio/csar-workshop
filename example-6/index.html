@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>exemple-6</title>
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+</head>
+<body>
+
+<!-- Same scene as the earlier examples. Fog at 0.01: the outer
+     turn of the spiral is about 38m out, far enough to be hazy
+     but not so far it disappears. -->
+<a-scene fog="type: exponential; color: #8a8a8a; density: 0.01">
+
+  <!-- uniform mid-gray background, no horizon or heavy contrast -->
+  <a-sky color="#8a8a8a"></a-sky>
+
+  <!-- ground: same average gray as the sky, with a light grid tiled
+       across it for orientation — the grid image is a 100x100 tile
+       with just a top and left edge line, so tiles line up into one
+       continuous grid with no doubled or missing lines -->
+  <a-plane rotation="-90 0 0" width="2000" height="2000"
+           material="shader: flat;
+                     src: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMDAnIGhlaWdodD0nMTAwJz4KPHJlY3Qgd2lkdGg9JzEwMCcgaGVpZ2h0PScxMDAnIGZpbGw9JyM3ZDdkN2QnLz4KPHBhdGggZD0nTTAgMEgxMDBNMCAwVjEwMCcgc3Ryb2tlPScjOTk5OTk5JyBzdHJva2Utd2lkdGg9JzEuNScvPgo8L3N2Zz4K);
+                     repeat: 1000 1000"></a-plane>
+
+  <!-- the camera: same rig as exemple-3, but standing at the center
+       of the spiral this time.
+
+       wasd-controls acceleration is lowered from its default 65 to
+       30, so walking is slower and easier to steer — the spiral is
+       around 300m long and meant to be covered deliberately, not
+       sprinted.
+
+       The counter is a child of the camera, which means it travels
+       with your head: a HUD rather than an object in the world. -->
+  <a-entity position="0 1.6 0" rotation="0 180 0">
+    <a-camera look-controls wasd-controls="acceleration: 30">
+      <a-text id="hud" value="0 / 0"
+              position="0 -0.45 -1" align="center" width="2.5"
+              color="#3a3a3a" side="double"></a-text>
+    </a-camera>
+  </a-entity>
+
+  <!-- every label we generate in script.js gets added inside here -->
+  <a-entity id="field"></a-entity>
+
+</a-scene>
+
+<!-- data.csv must sit in this same folder -->
+<script src="script.js"></script>
+
+</body>
+</html>
