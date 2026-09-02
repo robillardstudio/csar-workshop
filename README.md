@@ -2,8 +2,8 @@
 
 Gaëtan Robillard, Computational Semiotics Lab, 2026.
 
-![screenshot](screenshot-exemple-1.png)
-*csar workshop exemple 1*
+![screenshot](screenshot-example-1.png)
+*csar workshop example 1*
 
 This repository holds the in-class workshop materials for building a **first-person, browser-based visualization of machine-vision classification data**, using [A-Frame](https://aframe.io) and a CSV log collected from a live, on-device object classifier (MobileNetV4, running in-browser via ONNX/WebGPU) walked through the Oval at OSU.
 
@@ -23,11 +23,11 @@ csar-workshop/
 │   ├── casr-oval-park-workshop.csv                   # top-rank predictions only, lat/lon kept as-is
 │   ├── csar-oval-park-workshop-metric.csv            # lat/lon converted to local x/z meters
 │   └── csar-oval-park-workshop-metric-noduplicates.csv   # metric + duplicate rows removed —
-│                                                          #   the dataset actually used in exemple-2
-├── exemple-1/
+│                                                          #   the dataset actually used in example-2
+├── example-1/
 │   ├── index.html
 │   └── script.js       # baseline: data typed directly into the script as an array of objects
-└── exemple-2/
+└── example-2/
     ├── index.html
     ├── script.js        # loads points from an external CSV; adds random position and rotation
     ├── data.csv          # small hand-written sample (8 points), loaded by default
@@ -38,9 +38,9 @@ csar-workshop/
 
 The two folders are meant to be worked through in order, each adding one idea to the last — the same progression as the workshop itself:
 
-**`exemple-1`** — the data lives directly in the script as an array of objects, the same shape used in the p5.js OOP unit. This is the version to read first: one function turns a single data point into a visible label, and a loop calls it once per point. No file I/O, no randomness — just the core pattern.
+**`example-1`** — the data lives directly in the script as an array of objects, the same shape used in the p5.js OOP unit. This is the version to read first: one function turns a single data point into a visible label, and a loop calls it once per point. No file I/O, no randomness — just the core pattern.
 
-**`exemple-2`** — the array is replaced with a `fetch()` of an external CSV (same pattern as `loadTable()` in p5.js), and each label gets a small random position offset and rotation so the field doesn't read as a rigid grid. It ships with a tiny placeholder `data.csv`; swapping in `data-csar-oval.csv` (rename it to `data.csv`, or edit the `fetch()` path in `script.js`) replaces the placeholder points with the real, cleaned Oval Park walk.
+**`example-2`** — the array is replaced with a `fetch()` of an external CSV (same pattern as `loadTable()` in p5.js), and each label gets a small random position offset and rotation so the field doesn't read as a rigid grid. It ships with a tiny placeholder `data.csv`; swapping in `data-csar-oval.csv` (rename it to `data.csv`, or edit the `fetch()` path in `script.js`) replaces the placeholder points with the real, cleaned Oval Park walk.
 
 ## Running a scene
 
