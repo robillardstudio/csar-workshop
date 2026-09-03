@@ -12,11 +12,13 @@
 // above it, and the same 89 readings describe something else.
 //
 // The version below hijacks depth. z no longer means "where on
-// the Oval": it means "how sure the model was". Confident words
-// crowd around you, uncertain ones retreat into the fog. You are
-// no longer walking through a place, you are walking through the
-// classifier's own doubt — with x still carrying real geography,
-// so half the scene is a map and half of it is a mood.
+// the Oval": it means "how sure the model was". Doubt collects
+// around you and certainty stands at a distance — the further a
+// word is, the more the model meant it. Since it is unsure about
+// almost everything, you start inside a crowd of guesses with a
+// few convictions scattered far off in the fog, and reaching them
+// means walking away from everything else. x still carries real
+// geography, so half the scene is a map and half of it is a mood.
 // ===============================================================
 
 
@@ -85,20 +87,22 @@ const channels = {
   y: (p) => 1.6,
   // y: (p) => map(p.confidence, 0, MAX_C, 0.2, 12),   // confidence instead
 
-  // DEPTH — remapped: no longer where, but how sure.
+  // DEPTH — remapped: no longer where, but how sure. Low
+  // confidence lands at your feet, high confidence far away.
   //
   // Expect a lopsided field. The model is unsure about almost
-  // everything it saw, so two thirds of the words pile up at the
-  // far end and only a handful stand near you. That imbalance is
-  // not a bug in the mapping, it is what the data says.
+  // everything it saw, so most of the words pile up in the first
+  // few meters and only a handful stand out in the distance. That
+  // imbalance is not a bug in the mapping, it is what the data
+  // says.
   //
   // The third line is a different fix for the same fact: putting
-  // the values through a square root stretches the crowded low
-  // end apart. Which field drives a channel is one decision; the
+  // the values through a square root pushes the crowded low end
+  // apart. Which field drives a channel is one decision; the
   // shape of the mapping is another.
-  z: (p) => map(p.confidence, 0, MAX_C, 70, 5),
+  z: (p) => map(p.confidence, 0, MAX_C, 5, 70),
   // z: (p) => p.z,                                    // the real walk
-  // z: (p) => map(Math.sqrt(p.confidence), 0, Math.sqrt(MAX_C), 70, 5),
+  // z: (p) => map(Math.sqrt(p.confidence), 0, Math.sqrt(MAX_C), 5, 70),
 
   // SIZE
   size: (p) => map(p.confidence, 0, MAX_C, 0.8, 5),

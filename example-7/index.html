@@ -8,9 +8,10 @@
 <body>
 
 <!-- Same scene as the earlier examples. Fog at 0.006: with depth
-     driven by confidence, the least certain readings sit 70m out,
+     driven by confidence, the most certain readings sit 70m out,
      and the fog is what makes that distance felt rather than just
-     measured — doubt literally fades. -->
+     measured — the model's few convictions are the ones you can
+     barely make out. -->
 <a-scene fog="type: exponential; color: #8a8a8a; density: 0.006">
 
   <!-- uniform mid-gray background, no horizon or heavy contrast -->
@@ -25,9 +26,9 @@
                      src: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMDAnIGhlaWdodD0nMTAwJz4KPHJlY3Qgd2lkdGg9JzEwMCcgaGVpZ2h0PScxMDAnIGZpbGw9JyM3ZDdkN2QnLz4KPHBhdGggZD0nTTAgMEgxMDBNMCAwVjEwMCcgc3Ryb2tlPScjOTk5OTk5JyBzdHJva2Utd2lkdGg9JzEuNScvPgo8L3N2Zz4K);
                      repeat: 1000 1000"></a-plane>
 
-  <!-- the camera: same rig as exemple-3, facing +z. Walking
-       forward now means walking from the model's certainties into
-       its guesses. -->
+  <!-- the camera: same rig as exemple-3, facing +z. You start in
+       the thick of the model's guesses; walking forward means
+       leaving them behind to reach the few things it was sure of. -->
   <a-entity position="0 1.6 -5" rotation="0 180 0">
     <a-camera look-controls wasd-controls></a-camera>
   </a-entity>
