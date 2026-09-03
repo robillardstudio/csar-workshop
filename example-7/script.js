@@ -84,7 +84,7 @@ const channels = {
   // x: (p) => map(p.confidence, 0, MAX_C, -20, 20),   // confidence instead
 
   // HEIGHT — flat, everything at eye level
-  y: (p) => 1.6,
+  y: (p) => 2,
   // y: (p) => map(p.confidence, 0, MAX_C, 0.2, 12),   // confidence instead
 
   // DEPTH — remapped: no longer where, but how sure. Low
