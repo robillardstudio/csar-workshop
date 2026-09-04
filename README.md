@@ -13,29 +13,6 @@ The exercise sits inside a larger research question: machine vision systems impo
 
 No prior 3D, WebXR, or web development experience is assumed beyond the p5.js fundamentals (functions, data, basic OOP) covered earlier in the course.
 
-## Repository structure
-
-```
-csar-workshop/
-├── data/
-│   ├── live-detection_<timestamp>_raw.csv          # raw export from the live classifier: every
-│   │                                                #   prediction (top-3 ranks), GPS, bounding
-│   │                                                #   boxes, and timing metadata for each frame
-│   ├── clean.py                                     # turns a raw log into a small, ready-to-use CSV
-│   ├── casr-oval-park-workshop.csv                   # top-rank predictions only, lat/lon kept as-is
-│   ├── csar-oval-park-workshop-metric.csv            # lat/lon converted to local x/z meters
-│   └── csar-oval-park-workshop-metric-noduplicates.csv   # metric + duplicate rows removed —
-│                                                          #   the dataset actually used in example-2
-├── example-1/
-│   ├── index.html
-│   └── script.js       # baseline: data typed directly into the script as an array of objects
-└── example-2/
-    ├── index.html
-    ├── script.js        # loads points from an external CSV; adds random position and rotation
-    ├── data.csv          # small hand-written sample (8 points), loaded by default
-    └── data-csar-oval.csv   # the real, cleaned Oval Park dataset — swap this in for real data
-```
-
 ## The two examples
 
 The two folders are meant to be worked through in order, each adding one idea to the last — the same progression as the workshop itself:
