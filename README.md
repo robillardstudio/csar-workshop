@@ -36,13 +36,13 @@ Served from `https://robillardstudio.github.io/csar-workshop/`
 | **Remapping data** | [example-7/](https://robillardstudio.github.io/csar-workshop/example-7/) |
 | **Mood / atmospheric** | [example-8/](https://robillardstudio.github.io/csar-workshop/example-8/) |
 
-### The teaching progression
+### Coding workshop progression
 
 **`example-1`** — the data lives directly in the script as an array of objects, the same shape used in the p5.js OOP unit. This is the version to read first: one function turns a single data point into a visible label, and a loop calls it once per point. No file I/O, no randomness — just the core pattern.
 
 **`example-2`** — the array is replaced with a `fetch()` of an external CSV (same pattern as `loadTable()` in p5.js), and each label gets a small random position offset and rotation so the field doesn't read as a rigid grid. It ships with a tiny placeholder `data.csv`; swapping in `data-csar-oval.csv` (rename it to `data.csv`, or edit the `fetch()` path in `script.js`) replaces the placeholder points with the real, cleaned Oval Park walk.
 
-### The six typologies
+### Six typologies
 
 **`example-3` — Naturalism.** A hand-written lookup table supplies the world knowledge the classifier does not have: how high off the ground each thing named would actually be. `lakeside lakeshore` sits at 5cm, `park bench` at 45cm, `thatch thatched roof` at 6.5m. The walk itself is untouched — x and z still come from the GPS track — so only the vertical axis and the colour are authored. Any label missing from the table falls back to eye height in grey, which makes the table's incompleteness visible rather than hidden.
 
@@ -52,9 +52,9 @@ Served from `https://robillardstudio.github.io/csar-workshop/`
 
 **`example-6` — Navigation and gamification.** The scene becomes something to do rather than look at. All 89 classifications wind up a helix at constant radius, climbing from 1m to 24m, so `wasd-controls` runs with `fly: true` and reaching the top means learning to steer in three dimensions. An A-Frame component with a `tick()` handler — the first real behaviour in the series, and A-Frame's answer to p5's `draw()` — marks any word within 5m and keeps score on a HUD attached to the camera.
 
-**`example-7` — Remapping data.** Every visual channel is one line in a single `channels` block, with the line it replaced commented directly beneath it, so rewiring the whole scene is a two-line edit. As shipped it hijacks depth: z no longer means where on the Oval but how sure the model was, with doubt collecting at your feet and the few confident readings standing 70m off. A third commented option runs the same values through a square root, showing that the *shape* of a mapping is a second decision students rarely notice making.
+**`example-7` — Remapping data.** Every visual channel is one line in a single `channels` block, with the line it replaced commented directly beneath it, so rewiring the whole scene is a two-line edit. As shipped it hijacks depth: z no longer means where on the Oval but how sure the model was, with doubt collecting at your feet and the few confident readings standing 70m off. A third commented option runs the same values through a square root, showing that the *shape* of a mapping is construct rarely notices at first glance.
 
-**`example-8` — Mood / atmospheric.** Runs on one derived number: how many words a label contains. ImageNet stores categories as synonym lists, and `clean.py` strips the commas, so `worm fence snake fence snake-rail fence Virginia fence` arrives as one breathless string — a semantic gap measurable without any ground truth at all. Word count scales the *amplitude* of every property rather than its value, so one-word readings render identically on every reload while the stammering ones wobble in size, tilt, and glare pale out of the murk. The scene itself changes here for the first time: dark, and fogged down to about 25m of visibility against a 96m walk.
+**`example-8` — Mood / atmospheric.** Runs on one derived number: how many words a label contains. ImageNet stores categories as synonym lists, and `clean.py` strips the commas, so `worm fence snake fence snake-rail fence Virginia fence` arrives as one breathless string — a semantic gap measurable without any ground truth. Word count scales the *amplitude* of every property rather than its value, so one-word readings render identically on every reload while the stammering ones wobble in size, tilt, and glare pale out of the murk. The scene itself changes here for the first time: dark, and fogged down to about 25m of visibility against a 96m walk.
 
 ---
 
