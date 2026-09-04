@@ -45,30 +45,6 @@ Model `onnx-community/mobilenetv4_conv_small.e2400_r224_in1k`, fp16 on webgpu.
 > 164 frames carry a distinct coordinate (ratio 0.262).
 > Per-metre spatial claims should be read against that figure.
 
-## Model behaviour
-
-| | |
-| :--- | ---: |
-| confidence mean | 0.204 |
-| confidence max | 0.877 |
-| confidence p10 | 0.044 |
-| confidence p25 | 0.071 |
-| confidence p50 | 0.134 |
-| confidence p75 | 0.251 |
-| confidence p90 | 0.527 |
-| margin p25 | 0.016 |
-| margin p50 | 0.04 |
-| margin p75 | 0.127 |
-| below 005 | 0.128 |
-| below 010 | 0.378 |
-| below 020 | 0.683 |
-
-The margin is the confidence gap between rank 1 and rank 2 on the same frame:
-a small value means the top two categories were nearly tied and the label that
-surfaced was close to arbitrary. The `below_*` rates are given at three
-thresholds because any single threshold is an arbitrary cut — compare the
-percentiles instead when comparing sites.
-
 ## Vocabulary
 
 | | |
@@ -83,7 +59,11 @@ percentiles instead when comparing sites.
 | words per label max | 8 |
 | multiword share | 0.323 |
 
-### Most frequent labels
+Use `evenness` rather than `entropy_bits` to compare sites: raw entropy grows
+with the number of distinct labels and so tracks walk length as much as
+vocabulary spread.
+
+## Most frequent labels
 
 | # | label | count | share |
 | ---: | :--- | ---: | ---: |
@@ -93,6 +73,22 @@ percentiles instead when comparing sites.
 | 4 | `worm fence, snake fence, snake-rail fence, Virginia fence` | 16 | 0.098 |
 | 5 | `maze, labyrinth` | 15 | 0.091 |
 
-Use `evenness` rather than `entropy_bits` to compare sites: raw entropy grows
-with the number of distinct labels and so tracks walk length as much as
-vocabulary spread.
+## Model behaviour
+
+| | |
+| :--- | ---: |
+| confidence, median | 0.134 |
+| rank1−rank2 margin, median | 0.04 |
+| "no idea" rate (top-1 < 0.1) | 0.378 |
+
+**Confidence, median** — the typical score behind the winning label. Scores are
+a softmax over 1000 classes, so they run low everywhere; read this as a relative
+figure between sites, not as a probability of being right.
+
+**Rank1−rank2 margin, median** — the gap between the best guess and the runner-up
+on the same frame. A small margin means two unrelated categories were nearly
+tied, so the label that surfaced was close to arbitrary.
+
+**"No idea" rate** — the share of frames whose winning label scored under 0.1.
+The threshold is a convention, not a principled cut; the full percentile and
+threshold ranges are in `oval-park.json` for anything load-bearing.

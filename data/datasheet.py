@@ -261,18 +261,6 @@ Model `{cap['model']}`, {cap['dtype']} on {cap['backend']}.
 > {cap['frames']} frames carry a distinct coordinate (ratio {geo['gps_fix_ratio']}).
 > Per-metre spatial claims should be read against that figure.
 
-## Model behaviour
-
-| | |
-| :--- | ---: |
-{rows(mod)}
-
-The margin is the confidence gap between rank 1 and rank 2 on the same frame:
-a small value means the top two categories were nearly tied and the label that
-surfaced was close to arbitrary. The `below_*` rates are given at three
-thresholds because any single threshold is an arbitrary cut — compare the
-percentiles instead when comparing sites.
-
 ## Vocabulary
 
 | | |
@@ -281,15 +269,35 @@ percentiles instead when comparing sites.
             'evenness', 'top5_share', 'words_per_label_mean', 'words_per_label_max',
             'multiword_share'])}
 
-### Most frequent labels
+Use `evenness` rather than `entropy_bits` to compare sites: raw entropy grows
+with the number of distinct labels and so tracks walk length as much as
+vocabulary spread.
+
+## Most frequent labels
 
 | # | label | count | share |
 | ---: | :--- | ---: | ---: |
 {top}
 
-Use `evenness` rather than `entropy_bits` to compare sites: raw entropy grows
-with the number of distinct labels and so tracks walk length as much as
-vocabulary spread.
+## Model behaviour
+
+| | |
+| :--- | ---: |
+| confidence, median | {mod['confidence_p50']} |
+| rank1−rank2 margin, median | {mod['margin_p50']} |
+| "no idea" rate (top-1 < 0.1) | {mod['below_010']} |
+
+**Confidence, median** — the typical score behind the winning label. Scores are
+a softmax over 1000 classes, so they run low everywhere; read this as a relative
+figure between sites, not as a probability of being right.
+
+**Rank1−rank2 margin, median** — the gap between the best guess and the runner-up
+on the same frame. A small margin means two unrelated categories were nearly
+tied, so the label that surfaced was close to arbitrary.
+
+**"No idea" rate** — the share of frames whose winning label scored under 0.1.
+The threshold is a convention, not a principled cut; the full percentile and
+threshold ranges are in `{s.get('site_id')}.json` for anything load-bearing.
 """
 
 

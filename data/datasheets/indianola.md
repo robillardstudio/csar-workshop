@@ -45,30 +45,6 @@ Model `onnx-community/mobilenetv4_conv_small.e2400_r224_in1k`, fp16 on webgpu.
 > 164 frames carry a distinct coordinate (ratio 0.226).
 > Per-metre spatial claims should be read against that figure.
 
-## Model behaviour
-
-| | |
-| :--- | ---: |
-| confidence mean | 0.311 |
-| confidence max | 0.831 |
-| confidence p10 | 0.125 |
-| confidence p25 | 0.189 |
-| confidence p50 | 0.283 |
-| confidence p75 | 0.4 |
-| confidence p90 | 0.517 |
-| margin p25 | 0.052 |
-| margin p50 | 0.135 |
-| margin p75 | 0.293 |
-| below 005 | 0.0 |
-| below 010 | 0.043 |
-| below 020 | 0.274 |
-
-The margin is the confidence gap between rank 1 and rank 2 on the same frame:
-a small value means the top two categories were nearly tied and the label that
-surfaced was close to arbitrary. The `below_*` rates are given at three
-thresholds because any single threshold is an arbitrary cut — compare the
-percentiles instead when comparing sites.
-
 ## Vocabulary
 
 | | |
@@ -83,7 +59,11 @@ percentiles instead when comparing sites.
 | words per label max | 10 |
 | multiword share | 0.768 |
 
-### Most frequent labels
+Use `evenness` rather than `entropy_bits` to compare sites: raw entropy grows
+with the number of distinct labels and so tracks walk length as much as
+vocabulary spread.
+
+## Most frequent labels
 
 | # | label | count | share |
 | ---: | :--- | ---: | ---: |
@@ -93,6 +73,22 @@ percentiles instead when comparing sites.
 | 4 | `limousine, limo` | 15 | 0.091 |
 | 5 | `trailer truck, tractor trailer, trucking rig, rig, articulated lorry, semi` | 12 | 0.073 |
 
-Use `evenness` rather than `entropy_bits` to compare sites: raw entropy grows
-with the number of distinct labels and so tracks walk length as much as
-vocabulary spread.
+## Model behaviour
+
+| | |
+| :--- | ---: |
+| confidence, median | 0.283 |
+| rank1−rank2 margin, median | 0.135 |
+| "no idea" rate (top-1 < 0.1) | 0.043 |
+
+**Confidence, median** — the typical score behind the winning label. Scores are
+a softmax over 1000 classes, so they run low everywhere; read this as a relative
+figure between sites, not as a probability of being right.
+
+**Rank1−rank2 margin, median** — the gap between the best guess and the runner-up
+on the same frame. A small margin means two unrelated categories were nearly
+tied, so the label that surfaced was close to arbitrary.
+
+**"No idea" rate** — the share of frames whose winning label scored under 0.1.
+The threshold is a convention, not a principled cut; the full percentile and
+threshold ranges are in `indianola.json` for anything load-bearing.
