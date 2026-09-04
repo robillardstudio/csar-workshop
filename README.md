@@ -36,8 +36,6 @@ Served from `https://robillardstudio.github.io/csar-workshop/`
 | **Remapping data** | [example-7/](https://robillardstudio.github.io/csar-workshop/example-7/) |
 | **Mood / atmospheric** | [example-8/](https://robillardstudio.github.io/csar-workshop/example-8/) |
 
-> Each example is a folder containing `index.html`, so the live URL ends in a trailing slash (`example-3/`) rather than `.html`. These links require GitHub Pages to be enabled for this repository.
-
 ### The teaching progression
 
 **`example-1`** — the data lives directly in the script as an array of objects, the same shape used in the p5.js OOP unit. This is the version to read first: one function turns a single data point into a visible label, and a loop calls it once per point. No file I/O, no randomness — just the core pattern.
