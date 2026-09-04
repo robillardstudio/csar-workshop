@@ -79,3 +79,24 @@ Controls in-scene: drag to look around, WASD to move. `example-6` adds flying.
 - **Converts GPS to local meters** (`USE_LOCAL_XZ`) — latitude/longitude aren't usable as A-Frame world coordinates directly; this reprojects them to flat x/z offsets in meters from the first recorded point, using a flat-earth approximation that's accurate enough at the scale of a short walk.
 
 It also strips commas out of label text (some raw labels come back as `"maze, labyrinth"`), since a comma inside a field would otherwise be mistaken for a column separator once quoting is turned off — the same stripping that `example-8` reads as evidence.
+
+---
+
+## Datasheets
+
+`data/datasheet.py` builds a short datasheet for every recorded walk, so that sites can be compared on the same terms. It reads the **raw** logs rather than the cleaned ones, because two of the more useful measures need columns `clean.py` discards — the rank-2 confidence and `gps_accuracy`.
+
+```
+python3 datasheet.py             # every site listed in sites.csv
+python3 datasheet.py oval-park   # just one
+```
+
+Context that cannot be computed — site name, weather, time of day, what the route was — is written by hand in `data/sites.csv`, one row per walk. Everything else is derived. This split follows the *Datasheets for Datasets* convention (Gebru et al., 2021): recorded context alongside measured properties.
+
+Each run writes into `data/datasheets/`:
+
+| File | |
+| :--- | :--- |
+| [`oval-park.md`](data/datasheets/oval-park.md) · [`indianola.md`](data/datasheets/indianola.md) | readable summary — capture, geography, vocabulary, model behaviour |
+| `oval-park.json` · `indianola.json` | the same figures plus full confidence percentiles and margin quartiles |
+| `sites-comparison.csv` | one flat row per site, for analysis across walks |
