@@ -1,0 +1,99 @@
+{
+  "site": {
+    "raw_file": "live-detection_20260828-083140_raw.csv",
+    "site_id": "indianola",
+    "site_name": "Indianola Avenue",
+    "city": "Columbus OH",
+    "setting": "residential street with parked cars and street furniture",
+    "weather": "",
+    "route_note": ""
+  },
+  "source": {
+    "raw_file": "live-detection_20260828-083140_raw.csv",
+    "raw_rows": 492
+  },
+  "capture": {
+    "frames": 164,
+    "rows_all_ranks": 492,
+    "ranks_per_frame": 3,
+    "start_utc": "2026-08-28T12:29:29.269000+00:00",
+    "start_local": "2026-08-28 08:29:29",
+    "tz_offset_hours": -4,
+    "duration_s": 127.2,
+    "frames_per_s": 1.29,
+    "gps_accuracy_median_m": 14.1,
+    "gps_accuracy_max_m": 21.8,
+    "inference_ms_median": 73,
+    "model": "onnx-community/mobilenetv4_conv_small.e2400_r224_in1k",
+    "dtype": "fp16",
+    "backend": "webgpu",
+    "frame_size": "480x640"
+  },
+  "geography": {
+    "lat_median": 40.025328,
+    "lon_median": -83.001543,
+    "lat_min": 40.024421,
+    "lat_max": 40.02615,
+    "lon_min": -83.00178,
+    "lon_max": -83.001374,
+    "extent_x_m": 34.6,
+    "extent_z_m": 192.5,
+    "path_length_m": 218.0,
+    "unique_gps_fixes": 37,
+    "gps_fix_ratio": 0.226,
+    "step_median_m": 3.54
+  },
+  "model": {
+    "confidence_mean": 0.311,
+    "confidence_max": 0.831,
+    "confidence_p10": 0.125,
+    "confidence_p25": 0.189,
+    "confidence_p50": 0.283,
+    "confidence_p75": 0.4,
+    "confidence_p90": 0.517,
+    "margin_p25": 0.052,
+    "margin_p50": 0.135,
+    "margin_p75": 0.293,
+    "below_005": 0.0,
+    "below_010": 0.043,
+    "below_020": 0.274
+  },
+  "vocabulary": {
+    "labels_distinct": 13,
+    "type_token_ratio": 0.079,
+    "entropy_bits": 2.6,
+    "entropy_max_bits": 3.7,
+    "evenness": 0.703,
+    "top5_share": 0.878,
+    "words_per_label_mean": 4.9,
+    "words_per_label_max": 10,
+    "multiword_share": 0.768,
+    "top_labels": [
+      {
+        "label": "streetcar, tram, tramcar, trolley, trolley car",
+        "count": 70,
+        "share": 0.427
+      },
+      {
+        "label": "traffic light, traffic signal, stoplight",
+        "count": 31,
+        "share": 0.189
+      },
+      {
+        "label": "minivan",
+        "count": 16,
+        "share": 0.098
+      },
+      {
+        "label": "limousine, limo",
+        "count": 15,
+        "share": 0.091
+      },
+      {
+        "label": "trailer truck, tractor trailer, trucking rig, rig, articulated lorry, semi",
+        "count": 12,
+        "share": 0.073
+      }
+    ]
+  }
+}

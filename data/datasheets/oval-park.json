@@ -1,0 +1,99 @@
+{
+  "site": {
+    "raw_file": "live-detection_20260826-120120_raw.csv",
+    "site_id": "oval-park",
+    "site_name": "The Oval",
+    "city": "Columbus OH",
+    "setting": "open campus lawn with mature trees and paths",
+    "weather": "",
+    "route_note": ""
+  },
+  "source": {
+    "raw_file": "live-detection_20260826-120120_raw.csv",
+    "raw_rows": 492
+  },
+  "capture": {
+    "frames": 164,
+    "rows_all_ranks": 492,
+    "ranks_per_frame": 3,
+    "start_utc": "2026-08-26T15:59:09.206000+00:00",
+    "start_local": "2026-08-26 11:59:09",
+    "tz_offset_hours": -4,
+    "duration_s": 126.3,
+    "frames_per_s": 1.3,
+    "gps_accuracy_median_m": 15.0,
+    "gps_accuracy_max_m": 33.9,
+    "inference_ms_median": 65,
+    "model": "onnx-community/mobilenetv4_conv_small.e2400_r224_in1k",
+    "dtype": "fp16",
+    "backend": "webgpu",
+    "frame_size": "480x640"
+  },
+  "geography": {
+    "lat_median": 39.999561,
+    "lon_median": -83.011432,
+    "lat_min": 39.998951,
+    "lat_max": 39.999819,
+    "lon_min": -83.011604,
+    "lon_max": -83.011366,
+    "extent_x_m": 20.3,
+    "extent_z_m": 96.6,
+    "path_length_m": 131.3,
+    "unique_gps_fixes": 43,
+    "gps_fix_ratio": 0.262,
+    "step_median_m": 0.79
+  },
+  "model": {
+    "confidence_mean": 0.204,
+    "confidence_max": 0.877,
+    "confidence_p10": 0.044,
+    "confidence_p25": 0.071,
+    "confidence_p50": 0.134,
+    "confidence_p75": 0.251,
+    "confidence_p90": 0.527,
+    "margin_p25": 0.016,
+    "margin_p50": 0.04,
+    "margin_p75": 0.127,
+    "below_005": 0.128,
+    "below_010": 0.378,
+    "below_020": 0.683
+  },
+  "vocabulary": {
+    "labels_distinct": 23,
+    "type_token_ratio": 0.14,
+    "entropy_bits": 3.57,
+    "entropy_max_bits": 4.52,
+    "evenness": 0.79,
+    "top5_share": 0.683,
+    "words_per_label_mean": 2.81,
+    "words_per_label_max": 8,
+    "multiword_share": 0.323,
+    "top_labels": [
+      {
+        "label": "lakeside, lakeshore",
+        "count": 30,
+        "share": 0.183
+      },
+      {
+        "label": "mobile home, manufactured home",
+        "count": 27,
+        "share": 0.165
+      },
+      {
+        "label": "park bench",
+        "count": 24,
+        "share": 0.146
+      },
+      {
+        "label": "worm fence, snake fence, snake-rail fence, Virginia fence",
+        "count": 16,
+        "share": 0.098
+      },
+      {
+        "label": "maze, labyrinth",
+        "count": 15,
+        "share": 0.091
+      }
+    ]
+  }
+}
