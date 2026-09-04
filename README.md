@@ -13,7 +13,7 @@ The exercise sits inside a larger research question: machine vision systems impo
 
 No prior 3D, WebXR, or web development experience is assumed beyond the p5.js fundamentals (functions, data, basic OOP) covered earlier in the course.
 
-## The two examples
+## Examples
 
 The two folders are meant to be worked through in order, each adding one idea to the last — the same progression as the workshop itself:
 
@@ -30,7 +30,7 @@ Both examples are plain static files — no build step. `fetch()` of the CSV onl
 
 Controls in-scene: drag to look around, WASD to move.
 
-## The data pipeline
+## Data pipeline
 
 `data/clean.py` takes the raw classifier export and produces the file the A-Frame scenes actually read. It does three things, each switchable at the top of the script:
 
