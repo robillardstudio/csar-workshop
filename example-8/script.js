@@ -125,7 +125,7 @@ function makeLabel(point) {
   // the loudest words are also the most colorless.
   const hue = +(BASE_HUE + random(-1, 1) * u * HUE_WANDER).toFixed(1);
   const saturation = map(u, 0, 1, 10, 8).toFixed(0);
-  const lightness = map(u, 0, 1, 40, 78).toFixed(0);
+  const lightness = map(u, 0, 1, 40, 70).toFixed(0);
 
   el.setAttribute("value", point.label);
   el.setAttribute("position", `${point.x + x} ${y + u } ${point.z + z}`);
