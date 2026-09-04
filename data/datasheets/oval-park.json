@@ -5,8 +5,8 @@
     "site_name": "The Oval",
     "city": "Columbus OH",
     "setting": "open campus lawn with mature trees and paths",
-    "weather": "",
-    "route_note": ""
+    "weather": "sunny, mild",
+    "route_note": " around noon with few people crossing the park"
   },
   "source": {
     "raw_file": "live-detection_20260826-120120_raw.csv",

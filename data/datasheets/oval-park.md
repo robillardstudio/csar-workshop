@@ -5,6 +5,8 @@
 **Site Name** — The Oval
 **City** — Columbus OH
 **Setting** — open campus lawn with mature trees and paths
+**Weather** — sunny, mild
+**Route Note** —  around noon with few people crossing the park
 
 Source: [`live-detection_20260826-120120_raw.csv`](../live-detection_20260826-120120_raw.csv) — 492 rows, 164 frames x 3 ranks.
 

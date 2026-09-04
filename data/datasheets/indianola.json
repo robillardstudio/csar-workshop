@@ -4,9 +4,9 @@
     "site_id": "indianola",
     "site_name": "Indianola Avenue",
     "city": "Columbus OH",
-    "setting": "residential street with parked cars and street furniture",
-    "weather": "",
-    "route_note": ""
+    "setting": "residential street, small city center with parked cars and street furniture",
+    "weather": "sunny, mild",
+    "route_note": "early morning, few people, car traffic"
   },
   "source": {
     "raw_file": "live-detection_20260828-083140_raw.csv",

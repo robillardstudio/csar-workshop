@@ -4,7 +4,9 @@
 
 **Site Name** — Indianola Avenue
 **City** — Columbus OH
-**Setting** — residential street with parked cars and street furniture
+**Setting** — residential street, small city center with parked cars and street furniture
+**Weather** — sunny, mild
+**Route Note** — early morning, few people, car traffic
 
 Source: [`live-detection_20260828-083140_raw.csv`](../live-detection_20260828-083140_raw.csv) — 492 rows, 164 frames x 3 ranks.
 
