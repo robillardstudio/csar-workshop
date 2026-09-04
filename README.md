@@ -1,7 +1,6 @@
 # CSAR Workshop
 
 **Gaëtan Robillard** · Computational Semiotics Lab · 2026
-*Last updated 09/04*
 
 ![screenshot](screenshot-example-1.png)
 *csar workshop — example 1*
@@ -26,16 +25,16 @@ Each folder is a self-contained scene — `index.html`, `script.js`, and its own
 
 Served from `https://robillardstudio.github.io/csar-workshop/`
 
-| Example | Typology | Live page |
-| :--- | :--- | :--- |
-| `example-1` | starting pattern — data in the script | [example-1/](https://robillardstudio.github.io/csar-workshop/example-1/) |
-| `example-2` | external CSV and randomness | [example-2/](https://robillardstudio.github.io/csar-workshop/example-2/) |
-| `example-3` | **Naturalism** | [example-3/](https://robillardstudio.github.io/csar-workshop/example-3/) |
-| `example-4` | **Semantic clustering** | [example-4/](https://robillardstudio.github.io/csar-workshop/example-4/) |
-| `example-5` | **Repetition** | [example-5/](https://robillardstudio.github.io/csar-workshop/example-5/) |
-| `example-6` | **Navigation and gamification** | [example-6/](https://robillardstudio.github.io/csar-workshop/example-6/) |
-| `example-7` | **Remapping data** | [example-7/](https://robillardstudio.github.io/csar-workshop/example-7/) |
-| `example-8` | **Mood / atmospheric** | [example-8/](https://robillardstudio.github.io/csar-workshop/example-8/) |
+| Typology | Live page |
+| :--- | :--- |
+| starting pattern — data in the script | [example-1/](https://robillardstudio.github.io/csar-workshop/example-1/) |
+| external CSV and randomness | [example-2/](https://robillardstudio.github.io/csar-workshop/example-2/) |
+| **Naturalism** | [example-3/](https://robillardstudio.github.io/csar-workshop/example-3/) |
+| **Semantic clustering** | [example-4/](https://robillardstudio.github.io/csar-workshop/example-4/) |
+| **Repetition** | [example-5/](https://robillardstudio.github.io/csar-workshop/example-5/) |
+| **Navigation and gamification** | [example-6/](https://robillardstudio.github.io/csar-workshop/example-6/) |
+| **Remapping data** | [example-7/](https://robillardstudio.github.io/csar-workshop/example-7/) |
+| **Mood / atmospheric** | [example-8/](https://robillardstudio.github.io/csar-workshop/example-8/) |
 
 > Each example is a folder containing `index.html`, so the live URL ends in a trailing slash (`example-3/`) rather than `.html`. These links require GitHub Pages to be enabled for this repository.
 
