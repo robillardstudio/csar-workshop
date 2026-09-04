@@ -1,11 +1,12 @@
 # CSAR Workshop
 
-Gaëtan Robillard, Computational Semiotics Lab, 2026.
-
-Update on 09/04
+**Gaëtan Robillard** · Computational Semiotics Lab · 2026
+*Last updated 09/04*
 
 ![screenshot](screenshot-example-1.png)
-*csar workshop example 1*
+*csar workshop — example 1*
+
+---
 
 This repository holds the in-class workshop materials for building a **first-person, browser-based visualization of machine-vision classification data**, using [A-Frame](https://aframe.io) and a CSV log collected from a live, on-device object classifier (MobileNetV4, running in-browser via ONNX/WebGPU) walked through the Oval at OSU.
 
@@ -13,22 +14,64 @@ The exercise sits inside a larger research question: machine vision systems impo
 
 No prior 3D, WebXR, or web development experience is assumed beyond the p5.js fundamentals (functions, data, basic OOP) covered earlier in the course.
 
+---
+
 ## Examples
 
-The two folders are meant to be worked through in order, each adding one idea to the last — the same progression as the workshop itself:
+Each folder is a self-contained scene — `index.html`, `script.js`, and its own `data.csv`.
+
+**Examples 1 and 2** are the workshop's teaching progression, each adding one idea to the last. **Examples 3 to 8** come after the workshop: each one develops a single typology drawn from what the student groups actually built, taking one interpretive move as far as it will go.
+
+### Live pages
+
+Served from `https://robillardstudio.github.io/csar-workshop/`
+
+| Example | Typology | Live page |
+| :--- | :--- | :--- |
+| `example-1` | starting pattern — data in the script | [example-1/](https://robillardstudio.github.io/csar-workshop/example-1/) |
+| `example-2` | external CSV and randomness | [example-2/](https://robillardstudio.github.io/csar-workshop/example-2/) |
+| `example-3` | **Naturalism** | [example-3/](https://robillardstudio.github.io/csar-workshop/example-3/) |
+| `example-4` | **Semantic clustering** | [example-4/](https://robillardstudio.github.io/csar-workshop/example-4/) |
+| `example-5` | **Repetition** | [example-5/](https://robillardstudio.github.io/csar-workshop/example-5/) |
+| `example-6` | **Navigation and gamification** | [example-6/](https://robillardstudio.github.io/csar-workshop/example-6/) |
+| `example-7` | **Remapping data** | [example-7/](https://robillardstudio.github.io/csar-workshop/example-7/) |
+| `example-8` | **Mood / atmospheric** | [example-8/](https://robillardstudio.github.io/csar-workshop/example-8/) |
+
+> Each example is a folder containing `index.html`, so the live URL ends in a trailing slash (`example-3/`) rather than `.html`. These links require GitHub Pages to be enabled for this repository.
+
+### The teaching progression
 
 **`example-1`** — the data lives directly in the script as an array of objects, the same shape used in the p5.js OOP unit. This is the version to read first: one function turns a single data point into a visible label, and a loop calls it once per point. No file I/O, no randomness — just the core pattern.
 
 **`example-2`** — the array is replaced with a `fetch()` of an external CSV (same pattern as `loadTable()` in p5.js), and each label gets a small random position offset and rotation so the field doesn't read as a rigid grid. It ships with a tiny placeholder `data.csv`; swapping in `data-csar-oval.csv` (rename it to `data.csv`, or edit the `fetch()` path in `script.js`) replaces the placeholder points with the real, cleaned Oval Park walk.
 
+### The six typologies
+
+**`example-3` — Naturalism.** A hand-written lookup table supplies the world knowledge the classifier does not have: how high off the ground each thing named would actually be. `lakeside lakeshore` sits at 5cm, `park bench` at 45cm, `thatch thatched roof` at 6.5m. The walk itself is untouched — x and z still come from the GPS track — so only the vertical axis and the colour are authored. Any label missing from the table falls back to eye height in grey, which makes the table's incompleteness visible rather than hidden.
+
+**`example-4` — Semantic clustering.** Six categories the model can never output (`GROUND / LANDSCAPE`, `BOUNDARY / ENCLOSURE`, `SHELTER / ROOF`, …) are declared by hand, and the code inverts that list into a label-to-category lookup. Position stops being geography entirely: recorded coordinates are parsed and discarded, and every label travels to its category's meeting point on an arc 30m out, with the category name floating above it. Confidence drives size. An empty `UNSORTED` slot catches anything the taxonomy has no room for.
+
+**`example-5` — Repetition.** The dataset is counted before anything is drawn. Words then sort into lanes across x by how often they occur — the eleven words seen exactly once share one lane, `lakeside lakeshore` stands alone at fifteen — while z comes straight from the CSV. The repetition is therefore the real one: nothing is deduplicated or synthesised, so a word the model kept returning genuinely keeps reappearing along the length of the recorded walk.
+
+**`example-6` — Navigation and gamification.** The scene becomes something to do rather than look at. All 89 classifications wind up a helix at constant radius, climbing from 1m to 24m, so `wasd-controls` runs with `fly: true` and reaching the top means learning to steer in three dimensions. An A-Frame component with a `tick()` handler — the first real behaviour in the series, and A-Frame's answer to p5's `draw()` — marks any word within 5m and keeps score on a HUD attached to the camera.
+
+**`example-7` — Remapping data.** Every visual channel is one line in a single `channels` block, with the line it replaced commented directly beneath it, so rewiring the whole scene is a two-line edit. As shipped it hijacks depth: z no longer means where on the Oval but how sure the model was, with doubt collecting at your feet and the few confident readings standing 70m off. A third commented option runs the same values through a square root, showing that the *shape* of a mapping is a second decision students rarely notice making.
+
+**`example-8` — Mood / atmospheric.** Runs on one derived number: how many words a label contains. ImageNet stores categories as synonym lists, and `clean.py` strips the commas, so `worm fence snake fence snake-rail fence Virginia fence` arrives as one breathless string — a semantic gap measurable without any ground truth at all. Word count scales the *amplitude* of every property rather than its value, so one-word readings render identically on every reload while the stammering ones wobble in size, tilt, and glare pale out of the murk. The scene itself changes here for the first time: dark, and fogged down to about 25m of visibility against a 96m walk.
+
+---
+
 ## Running a scene
 
-Both examples are plain static files — no build step. `fetch()` of the CSV only works when the page is served over `http`, so **double-clicking `index.html` will not work**. Easiest options:
+All the examples are plain static files — no build step. `fetch()` of the CSV only works when the page is served over `http`, so **double-clicking `index.html` will not work**. Easiest options:
 
-- Open the files in [p5 web editor](https://editor.p5js.org/)
-- Or serve it locally: `python3 -m http.server` from inside the folder, then visit `http://localhost:8000`.
+- Open the files in the [p5 web editor](https://editor.p5js.org/)
+- Or serve them locally: `python3 -m http.server` from inside the folder, then visit `http://localhost:8000`
+- Or use the live pages linked above
 
-Controls in-scene: drag to look around, WASD to move.
+Controls in-scene: drag to look around, WASD to move. `example-6` adds flying.
+
+---
 
 ## Data pipeline
 
@@ -38,4 +81,4 @@ Controls in-scene: drag to look around, WASD to move.
 - **Removes duplicate points** (`REMOVE_LATLON_DUPLICATES`) — consecutive frames at (near-)identical GPS coordinates collapse to a single row per unique (lat, lon, label) combination, so a person standing still doesn't produce dozens of stacked labels.
 - **Converts GPS to local meters** (`USE_LOCAL_XZ`) — latitude/longitude aren't usable as A-Frame world coordinates directly; this reprojects them to flat x/z offsets in meters from the first recorded point, using a flat-earth approximation that's accurate enough at the scale of a short walk.
 
-It also strips commas out of label text (some raw labels come back as `"maze, labyrinth"`), since a comma inside a field would otherwise be mistaken for a column separator once quoting is turned off.
+It also strips commas out of label text (some raw labels come back as `"maze, labyrinth"`), since a comma inside a field would otherwise be mistaken for a column separator once quoting is turned off — the same stripping that `example-8` reads as evidence.
