@@ -66,10 +66,11 @@ function makeLabel(point) {
   const jitterZ = random(-0.6, 0.6);
   const spin = random(0, 45);
   const coef = 10
+  const facing = 180;
 
   el.setAttribute("value", point.label);
   el.setAttribute("position", `${point.x + jitterX * coef} 1.6 ${point.z + jitterZ * coef}`);
-  el.setAttribute("rotation", `0 ${spin} 0`);
+  el.setAttribute("rotation", `0 ${spin + facing} 0`);
   el.setAttribute("align", "center");
   el.setAttribute("width", "6");
   // font attribute
