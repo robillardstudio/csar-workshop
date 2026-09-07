@@ -1,8 +1,8 @@
-# Olentangy River Bike Trail
+# Olentangy Trail
 
-`olentangy-river` · 2026-09-04 19:57:38 (UTC-4) · 556.9 s
+`olentangy-trail` · 2026-09-04 19:57:38 (UTC-4) · 556.9 s
 
-**Site Name** — Olentangy River Bike Trail
+**Site Name** — Olentangy Trail
 **City** — Columbus OH
 **Setting** — bike trail shared by bikes, pedestrians and runners
 **Weather** — sunny, mild
@@ -91,4 +91,4 @@ tied, so the label that surfaced was close to arbitrary.
 
 **"No idea" rate** — the share of frames whose winning label scored under 0.1.
 The threshold is a convention, not a principled cut; the full percentile and
-threshold ranges are in `olentangy-river.json` for anything load-bearing.
+threshold ranges are in `olentangy-trail.json` for anything load-bearing.

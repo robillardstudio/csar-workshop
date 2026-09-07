@@ -1,8 +1,8 @@
 {
   "site": {
     "raw_file": "live-detection_20260904-200659_raw.csv",
-    "site_id": "olentangy-river",
-    "site_name": "Olentangy River Bike Trail",
+    "site_id": "olentangy-trail",
+    "site_name": "Olentangy Trail",
     "city": "Columbus OH",
     "setting": "bike trail shared by bikes, pedestrians and runners",
     "weather": "sunny, mild",
