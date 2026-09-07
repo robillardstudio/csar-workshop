@@ -6,10 +6,11 @@ logs, so there is only one place where a metric is ever computed and the
 summary can never quietly disagree with the individual datasheets. Run
 datasheet.py first.
 
-Seven figures per site, nothing else:
+A handful of figures per site, nothing else:
 
     model, duration, path length, labels distinct,
-    top label, confidence median, rank1-rank2 margin median
+    labels distinct / path length, top label,
+    confidence median, rank1-rank2 margin median
 
 Writes datasheets/summary.md and prints the same table.
 
@@ -27,12 +28,31 @@ SITES_FILE = HERE / "sites.csv"
 OUT_DIR = HERE / "datasheets"
 OUT_FILE = OUT_DIR / "summary.md"
 
+def labels_per_metre(d):
+    """Distinct labels divided by distance walked.
+
+    Raw distinct-label counts are not comparable between walks of very
+    different length: a longer walk has more chances to turn up a new
+    word. Dividing by path length asks a fairer question — how much fresh
+    vocabulary did a metre of this place cost the model?
+
+    Only a partial correction. New labels do not accumulate linearly with
+    distance — they saturate, as the model exhausts the categories a
+    place can suggest — so this still favours short walks. Treat it as an
+    order of magnitude, not a coefficient.
+    """
+    labels = d["vocabulary"]["labels_distinct"]
+    metres = d["geography"]["path_length_m"]
+    return round(labels / metres, 4) if metres else None
+
+
 # label shown in the table, and where to find it in the sidecar
 FIELDS = [
     ("model", lambda d: d["capture"]["model"]),
     ("duration", lambda d: f'{d["capture"]["duration_s"]} s'),
     ("path length", lambda d: f'{d["geography"]["path_length_m"]} m'),
     ("labels distinct", lambda d: d["vocabulary"]["labels_distinct"]),
+    ("labels distinct / path length", lambda d: f"{labels_per_metre(d)} /m"),
     ("top label", lambda d: f'`{d["vocabulary"]["top_labels"][0]["label"]}`'),
     ("confidence, median", lambda d: d["model"]["confidence_p50"]),
     ("rank1−rank2 margin, median", lambda d: d["model"]["margin_p50"]),
