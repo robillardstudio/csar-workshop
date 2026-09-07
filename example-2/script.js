@@ -64,7 +64,7 @@ function makeLabel(point) {
 
   const jitterX = random(-0.6, 0.6);
   const jitterZ = random(-0.6, 0.6);
-  const spin = random(0, 45);
+  const spin = random(-20, 20);
   const coef = 10
   const facing = 180;
 
