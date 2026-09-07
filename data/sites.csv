@@ -1,4 +1,4 @@
 raw_file,site_id,site_name,city,setting,weather,route_note
 live-detection_20260826-120120_raw.csv,oval-park,The Oval,Columbus OH,open campus lawn with mature trees and paths,"sunny, mild","around noon with few people crossing the park"
 live-detection_20260828-083140_raw.csv,indianola,Indianola Avenue,Columbus OH,"residential street, small city center with parked cars and street furniture","sunny, mild","early morning, few people, car traffic"
-live-detection_20260904-200659_raw.csv,olentangy-river,Olentangy River Bike Trail,Columbus OH,"bike trail shared by bikes, pedestrians and runners","sunny, mild","low light conditions right after sunset, muddy bike trail resulting from recent flood, few people"
+live-detection_20260904-200659_raw.csv,olentangy-trail,Olentangy Trail,Columbus OH,"bike trail shared by bikes, pedestrians and runners","sunny, mild","low light conditions right after sunset, muddy bike trail resulting from recent flood, few people"
