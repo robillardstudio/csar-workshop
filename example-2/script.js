@@ -14,7 +14,7 @@
 // ---------------------------------------------------------------
 
 async function loadData() {
-  const response = await fetch("data-csar-oval.csv");
+  const response = await fetch("data.csv");
   const text = await response.text();
   return parseCSV(text);
 }
