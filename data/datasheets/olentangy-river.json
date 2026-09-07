@@ -1,0 +1,99 @@
+{
+  "site": {
+    "raw_file": "live-detection_20260904-200659_raw.csv",
+    "site_id": "olentangy-river",
+    "site_name": "Olentangy River Bike Trail",
+    "city": "Columbus OH",
+    "setting": "bike trail shared by bikes, pedestrians and runners",
+    "weather": "sunny, mild",
+    "route_note": "low light conditions right after sunset, muddy bike trail resulting from recent flood, few people"
+  },
+  "source": {
+    "raw_file": "live-detection_20260904-200659_raw.csv",
+    "raw_rows": 2080
+  },
+  "capture": {
+    "frames": 693,
+    "rows_all_ranks": 2080,
+    "ranks_per_frame": 3,
+    "start_utc": "2026-09-04T23:57:38.056000+00:00",
+    "start_local": "2026-09-04 19:57:38",
+    "tz_offset_hours": -4,
+    "duration_s": 557.7,
+    "frames_per_s": 1.24,
+    "gps_accuracy_median_m": 22.9,
+    "gps_accuracy_max_m": 60.7,
+    "inference_ms_median": 66,
+    "model": "Xenova/yolos-tiny",
+    "dtype": "fp16",
+    "backend": "webgpu",
+    "frame_size": "480x640"
+  },
+  "geography": {
+    "lat_median": 40.024981,
+    "lon_median": -83.021387,
+    "lat_min": 40.022132,
+    "lat_max": 40.027025,
+    "lon_min": -83.024172,
+    "lon_max": -83.01989,
+    "extent_x_m": 365.0,
+    "extent_z_m": 544.7,
+    "path_length_m": 1270.9,
+    "unique_gps_fixes": 181,
+    "gps_fix_ratio": 0.261,
+    "step_median_m": 3.54
+  },
+  "model": {
+    "confidence_mean": 0.187,
+    "confidence_max": 0.961,
+    "confidence_p10": 0.056,
+    "confidence_p25": 0.079,
+    "confidence_p50": 0.121,
+    "confidence_p75": 0.211,
+    "confidence_p90": 0.447,
+    "margin_p25": 0.017,
+    "margin_p50": 0.048,
+    "margin_p75": 0.139,
+    "below_005": 0.071,
+    "below_010": 0.397,
+    "below_020": 0.732
+  },
+  "vocabulary": {
+    "labels_distinct": 25,
+    "type_token_ratio": 0.036,
+    "entropy_bits": 2.83,
+    "entropy_max_bits": 4.64,
+    "evenness": 0.609,
+    "top5_share": 0.833,
+    "words_per_label_mean": 2.69,
+    "words_per_label_max": 8,
+    "multiword_share": 0.229,
+    "top_labels": [
+      {
+        "label": "park bench",
+        "count": 323,
+        "share": 0.466
+      },
+      {
+        "label": "lakeside, lakeshore",
+        "count": 85,
+        "share": 0.123
+      },
+      {
+        "label": "oxcart",
+        "count": 75,
+        "share": 0.108
+      },
+      {
+        "label": "worm fence, snake fence, snake-rail fence, Virginia fence",
+        "count": 64,
+        "share": 0.092
+      },
+      {
+        "label": "sandbar, sand bar",
+        "count": 30,
+        "share": 0.043
+      }
+    ]
+  }
+}
