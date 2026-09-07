@@ -10,21 +10,21 @@
   },
   "source": {
     "raw_file": "live-detection_20260904-200659_raw.csv",
-    "raw_rows": 2080
+    "raw_rows": 2079
   },
   "capture": {
     "frames": 693,
-    "rows_all_ranks": 2080,
+    "rows_all_ranks": 2079,
     "ranks_per_frame": 3,
-    "start_utc": "2026-09-04T23:57:38.056000+00:00",
+    "start_utc": "2026-09-04T23:57:38.847000+00:00",
     "start_local": "2026-09-04 19:57:38",
     "tz_offset_hours": -4,
-    "duration_s": 557.7,
+    "duration_s": 556.9,
     "frames_per_s": 1.24,
     "gps_accuracy_median_m": 22.9,
     "gps_accuracy_max_m": 60.7,
     "inference_ms_median": 66,
-    "model": "Xenova/yolos-tiny",
+    "model": "onnx-community/mobilenetv4_conv_small.e2400_r224_in1k",
     "dtype": "fp16",
     "backend": "webgpu",
     "frame_size": "480x640"

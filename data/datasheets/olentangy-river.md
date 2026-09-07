@@ -1,6 +1,6 @@
 # Olentangy River Bike Trail
 
-`olentangy-river` · 2026-09-04 19:57:38 (UTC-4) · 557.7 s
+`olentangy-river` · 2026-09-04 19:57:38 (UTC-4) · 556.9 s
 
 **Site Name** — Olentangy River Bike Trail
 **City** — Columbus OH
@@ -8,21 +8,21 @@
 **Weather** — sunny, mild
 **Route Note** — low light conditions right after sunset, muddy bike trail resulting from recent flood, few people
 
-Source: [`live-detection_20260904-200659_raw.csv`](../live-detection_20260904-200659_raw.csv) — 2080 rows, 693 frames x 3 ranks.
+Source: [`live-detection_20260904-200659_raw.csv`](../live-detection_20260904-200659_raw.csv) — 2079 rows, 693 frames x 3 ranks.
 
 ## Capture
 
 | | |
 | :--- | ---: |
 | frames | 693 |
-| duration s | 557.7 |
+| duration s | 556.9 |
 | frames per s | 1.24 |
 | gps accuracy median m | 22.9 |
 | gps accuracy max m | 60.7 |
 | inference ms median | 66 |
 | frame size | 480x640 |
 
-Model `Xenova/yolos-tiny`, fp16 on webgpu.
+Model `onnx-community/mobilenetv4_conv_small.e2400_r224_in1k`, fp16 on webgpu.
 
 ## Geography
 
