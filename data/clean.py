@@ -21,8 +21,8 @@ USE_LOCAL_XZ = True
 # Set to True to drop rows whose (lat, lon) pair repeats an earlier row.
 REMOVE_LATLONLABEL_DUPLICATES = True
 
-INPUT_FILE = "live-detection_20260828-083140_raw.csv"
-OUTPUT_FILE = "csar-indianola-workshop-metric-noduplicates.csv"
+INPUT_FILE = "live-detection_20260904-200659_raw.csv"
+OUTPUT_FILE = "csar-olentangy-river-workshop-metric-noduplicates.csv"
 
 EARTH_RADIUS_M = 6378137.0  # WGS84 equatorial radius
 
