@@ -110,8 +110,8 @@ function makeLabel(point) {
   const u = unease(point.label);
 
   const y = 1 + random(-0.3, 0.3);
-  const z = random(-5, 5);
-  const x = random(-3, 3);
+  const z = random(-10, 10);
+  const x = random(-10, 10);
 
   // size: steady words land near BASE_SIZE, stammering ones can
   // come out much larger or much smaller — and differently on
@@ -128,8 +128,8 @@ function makeLabel(point) {
   const lightness = map(u, 0, 1, 40, 70).toFixed(0);
 
   el.setAttribute("value", point.label);
-  el.setAttribute("position", `${point.x + x} ${y + u } ${point.z + z}`);
-  el.setAttribute("rotation", `0 ${FACING + random(-8, 8)} ${random(-1, 1) * u * ROLL}`);
+  el.setAttribute("position", `${x} ${y + u } ${z}`);
+  el.setAttribute("rotation", `0 ${FACING + random(-45, 45)} ${random(-1, 1) * u * ROLL}`);
   el.setAttribute("scale", `${size} ${size} ${size}`);
   el.setAttribute("align", "center");
   el.setAttribute("width", "6");
