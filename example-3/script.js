@@ -63,7 +63,7 @@ function parseCSV(text) {
 const nature = {
 
   // the ground itself — broad and flat, face the camera
-  "lakeside lakeshore":  { y: 0, rotation: 0, rotationX: -90, rotationY: 0, size: 8.0, color: "#6d8494" },
+  "lakeside lakeshore":  { y: 0, rotation: 0, rotationX: -90, rotationY: 90, size: 8.0, color: "#6d8494" },
   "sandbar sand bar":    { y: 0, rotation: 0, rotationX: -90, rotationY: 0, size: 3.5, color: "#b9a882" },
   "patio terrace":       { y: 0.08, rotation: 0, rotationX: -90, rotationY: 0, size: 6, color: "#8f8b85" },
 
