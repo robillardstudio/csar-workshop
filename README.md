@@ -2,7 +2,7 @@
 
 **Gaëtan Robillard** · Computational Semiotics Lab · 2026
 
-![screenshot](screenshot-example-1.png)
+![screenshot](csar-gif-1-2.png)
 *csar workshop — example 1*
 
 ---
